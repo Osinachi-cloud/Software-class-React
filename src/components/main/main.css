@@ -1,0 +1,19 @@
+.main-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    width: 90%;
+    margin:auto;
+}
+@media screen and (max-width:960px){
+    .main-container{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+}
+@media screen and (max-width:768px){
+    .main-container{
+        grid-template-columns: 1fr;
+    }
+    
+}
