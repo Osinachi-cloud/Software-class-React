@@ -1,19 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { cardData } from '../../data/data'
 import { Card } from '../card/Card'
 import './main.css'
 
 export const Main = () => {
+
+  const [URL, setURL] = useState(`https://fakestoreapi.com/products`);
+  const [products, setProducts] = useState([]);
+
+  const fetchApiProducts = () =>{
+      fetch(URL).then((apiSuccessResponse)=>{
+        return apiSuccessResponse.json();
+      }).then((data)=>{
+        setProducts(data);
+      }).catch((apiErrorResponse)=>{
+        console.log(apiErrorResponse);
+      })
+  }
+
+  useEffect(()=>{
+    fetchApiProducts();
+  },[])
+
   return (
     <>
         <div className="main-container">
             {
-                cardData.map((eachCardObject)=>(
+                products.map((eachCardObject)=>(
                     <Card
-                        image={eachCardObject.image}
-                        title={eachCardObject.title}
-                        price={eachCardObject.price}
-                        description={eachCardObject.description}
+                        key={eachCardObject.id}
+                        eachCard={eachCardObject}
+                        products= {products}
                 />
                 ))
             }
